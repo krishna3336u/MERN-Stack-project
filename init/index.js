@@ -20,6 +20,10 @@ async function main() {
 const initDB = async () => {
   try {
     await Listing.deleteMany({});
+    initData.data=initData.data.map((obj)=>({
+      ...obj,
+      owner:"69cf9bea477295a795e1a10f",
+    }));
     await Listing.insertMany(initData.data);
     console.log("Data was initialized");
   } catch (err) {
@@ -28,4 +32,4 @@ const initDB = async () => {
     mongoose.connection.close(); // Close connection
   }
 };
-initDB();
+//initDB();

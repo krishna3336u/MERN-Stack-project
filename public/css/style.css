@@ -61,8 +61,14 @@ body {
 .card-text p{
     font-weight: 400;
 }
-.listing-link{
-    text-decoration: none;
+.listing-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.listing-card:hover {
+    transform: scale(1.02);
+    transition: 0.2s;
 }
 .card-img-overlay{
     opacity: 0;
