@@ -1,52 +1,38 @@
-// routes/listings.js
-
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const { storage } = require("../cloudConfig.js");
-const upload = multer({ storage });
-
 const wrapAsync = require("../utils/wrapAsync.js");
-const Listing = require("../models/listing.js");
-const listingController = require("../controllers/listings.js");
-
-const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
-
-// ======================
-// LISTINGS ROUTES
-// ======================
-
-// INDEX - Show all listings
+const ExpressError = require("../utils/ExpressError.js");
+const Listing = require("../models/listing.js"); 
+const { listingSchema } = require("../schema.js");
+const {isLoggedIn, isOwner,validateListing,validateReview}=require("../middleware.js");
+const { populate } = require("../models/review.js");
+const listingController=require("../controllers/listings.js");
+const multer=require('multer');
+const {storage}=require("../cloudConfig.js");
+const upload=multer({storage});
+// Index Route
 router.get("/", wrapAsync(listingController.index));
 
-// NEW - Render form to create a new listing
-router.get("/new", isLoggedIn, listingController.renderNewform);
+// New Route
+router.get("/new",isLoggedIn, listingController.renderNewform
+);
 
-// SHOW - Show a single listing
+// Show Route
 router.get("/:id", wrapAsync(listingController.showListing));
 
-// CREATE - Add a new listing
-router.post(
-  "/",
-  isLoggedIn,
-  upload.single("listing[image]"),
-  validateListing,
-  wrapAsync(listingController.createListing)
-);
+// Create Route
+router.post("/",isLoggedIn,upload.single("listing[image]"), validateListing, wrapAsync(listingController.createListing));
+// router.post("/",upload.single("listing[image]"),(req,res)=>{
+//   res.send(req.file);
+// });
 
-// EDIT - Render form to edit a listing
-router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editListing));
+// Edit Route
+router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(listingController.editListing));
 
-// UPDATE - Update a listing
-router.put(
-  "/:id",
-  isLoggedIn,
-  isOwner,
-  upload.single("listing[image]"),
-  wrapAsync(listingController.updateListing)
-);
+// Update Route
+router.put("/:id",isLoggedIn,isOwner,upload.single("listing[image]"), wrapAsync(listingController.updateListing));
 
-// DELETE - Delete a listing
-router.delete("/:id", isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
+// Delete Route
+router.delete("/:id",isLoggedIn,isOwner, wrapAsync(listingController.deleteListing));
 
 module.exports = router;
