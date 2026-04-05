@@ -5,8 +5,8 @@ const Review = require("../models/review.js");
 
 // INDEX - Show all listings
 module.exports.index = async (req, res) => {
-  const listings = await Listing.find({});
-  res.render("listings/index", { listings });
+  const  allListings = await Listing.find({});
+  res.render("listings/index", { allListings });
 };
 
 // RENDER NEW LISTING FORM
