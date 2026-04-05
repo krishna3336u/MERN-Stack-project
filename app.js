@@ -24,7 +24,7 @@ const reviewRouter= require("./routes/review.js");
 app.use(express.urlencoded({ extended: true }));
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+mongoose.connect(process.env.ATLASDB_URL);
 
 main()
   .then(() => {
@@ -35,7 +35,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 app.set("view engine", "ejs");
