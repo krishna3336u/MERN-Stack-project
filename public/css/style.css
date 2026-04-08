@@ -1,85 +1,185 @@
 
+/* Global Font & Body Styles */
 body {
-  font-family: "Plus Jakarta Sans", sans-serif !important;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures footer sticks to the bottom */
+    background-color: #f8f9fa; /* Light background for the whole site */
+    overflow-x: hidden; /* Prevent horizontal scroll due to potential overflows */
 }
-.container{
-    flex: 1;
+
+/* Ensure the main content area grows to push the footer down */
+/* This works in conjunction with flex properties on the body */
+.container {
+    flex: 1; /* Allow content to grow */
 }
-.navbar{
-    height: 5rem;
-    background-color: white;
+
+/* Navbar specific styles (from your original CSS and navbar.ejs fixes) */
+.navbar {
+    /* Removed fixed height: 5rem; - Bootstrap handles height responsively */
+    background-color: white; /* Ensure navbar has white background */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
 }
-.fa-compass{
+
+.fa-compass {
     color: #fe424d;
-    font-size: 2rem;
+    font-size: 1.8rem; /* Slightly adjusted for better mobile fit */
 }
-.nav-link{
+
+.nav-link {
     color: #222222 !important;
+    font-weight: 500; /* Add some weight for better readability */
+    transition: color 0.2s ease-in-out; /* Smooth transition */
 }
-.f-info-links a{
+.nav-link:hover {
+    color: #fe424d !important; /* Highlight on hover */
+}
+
+/* Custom Search Input & Button (from navbar.ejs) */
+/* These are now in navbar.ejs <style> to keep them component-specific */
+
+
+/* Footer Styles - Responsive */
+.f-info {
+    background-color: #ebebeb;
+    padding: 2rem 1rem; /* Responsive padding */
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto new lines */
+    justify-content: space-around; /* Distributes items evenly with space around them */
+    align-items: flex-start; /* Aligns items to the top within their flex container */
+    gap: 1.5rem; /* Space between flex items */
+    margin-top: auto; /* Pushes the footer to the bottom of the page */
+    border-top: 1px solid #ddd; /* Subtle top border */
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand {
+    text-align: center;
+    flex-grow: 1; /* Allows these sections to grow if space permits */
+    min-width: 150px; /* Minimum width before wrapping */
+    padding: 0.5rem;
+}
+
+.f-info-links a {
     text-decoration: none;
     color: #222222;
+    display: block; /* Make links stack vertically by default */
+    padding: 0.2rem 0;
+    transition: color 0.2s;
 }
-.f-info-links a:hover{
+
+.f-info-links a:hover {
+    color: #fe424d;
     text-decoration: underline;
 }
-.f-info-links,.f-info-socials,.f-info-brand{
-    width: 100%;
-    display: flex;
-    
-    align-items: center;
-    
-    justify-content: center;
+
+.f-info-socials i {
+    font-size: 1.2rem; /* Slightly larger social icons */
+    margin: 0 0.8rem; /* Space between social icons */
+    color: #555;
+    transition: color 0.2s;
+}
+.f-info-socials i:hover {
+    color: #fe424d; /* Social icons hover effect */
 }
 
-.f-info-socials i{
-  font-size: 1rem;
-  margin-right: 1.2rem;
+.f-info-brand {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
 }
-.f-info{
-    text-align: center;
-    height: 8rem;
-    background-color: #ebebeb;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
+
+/* Media query for smaller screens (e.g., mobile) for footer */
+@media (max-width: 767.98px) {
+    .f-info {
+        flex-direction: column; /* Stack sections vertically on small screens */
+        align-items: center; /* Center all items when stacked */
+        padding: 1.5rem 0.5rem;
+    }
+    .f-info-links, .f-info-socials, .f-info-brand {
+        width: 100%; /* Take full width when stacked */
+        margin-bottom: 0.8rem; /* Space between stacked sections */
+    }
+    .f-info-links a {
+        display: inline-block; /* Display inline for horizontal links on mobile */
+        margin: 0 0.6rem; /* Space them out horizontally */
+        font-size: 0.85rem;
+    }
 }
-.listing-card{
+
+
+/* Listing Card Styles (General) */
+.listing-card {
     border: none !important;
-    margin-bottom: 2rem;
-
+    border-radius: 1rem; /* Unified border-radius for the card */
+    overflow: hidden; /* Ensures image corners match card corners */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Subtle shadow */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition */
 }
-.card-img-top{
-    border-radius: 1rem !important;
+
+.listing-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* More pronounced shadow on hover */
+}
+
+.card-img-top {
+    border-radius: 1rem !important; /* Make sure image corners match card */
     width: 100% !important;
     object-fit: cover !important;
+    height: 18rem; /* Default height for images */
 }
-.card-text p{
-    font-weight: 400;
-}
+
+/* Specific overrides for index.ejs are in index.ejs <style> */
+/* E.g., for different image heights on mobile */
+
 .listing-link {
   text-decoration: none;
-  color: inherit;
-  display: block;
+  color: inherit; /* Inherit text color from parent */
+  display: block; /* Make the entire card clickable */
 }
-.listing-card:hover {
-    transform: scale(1.02);
-    transition: 0.2s;
+
+.card-text b {
+    font-size: 1.1rem; /* Make title bolder */
+    line-height: 1.4;
 }
-.card-img-overlay{
+.card-text p {
+    font-weight: 400;
+    margin-bottom: 0; /* Remove default paragraph margin */
+}
+
+/* Card Image Overlay for Hover Effect */
+.card-img-overlay {
     opacity: 0;
-}
-.card-img-overlay:hover{
-    opacity: 0.2;
-    background-color: white;
-}
-.show-img{
-    height: 30vh;
-}
-.btns{
+    background-color: rgba(0,0,0,0.3); /* Dark transparent overlay */
+    transition: opacity 0.3s ease-in-out;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.listing-card:hover .card-img-overlay { /* Show overlay on card hover */
+    opacity: 1;
+}
+
+/* Single Listing Page (show.ejs) Image */
+.show-img {
+    height: 60vh; /* Taller image for detailed view */
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+}
+/* Responsive adjustment for show-img */
+@media (max-width: 767.98px) {
+  .show-img {
+    height: 45vh; /* Shorter on mobile for better viewing experience */
+  }
+}
+
+/* Buttons (e.g., Edit/Delete) on show.ejs */
+.btns {
+    display: flex;
+    gap: 1rem; /* Space between buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap to new line on small screens */
+    margin-top: 1rem; /* Space above buttons */
 }
